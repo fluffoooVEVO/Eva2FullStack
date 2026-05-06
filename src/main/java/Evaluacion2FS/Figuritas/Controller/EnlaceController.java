@@ -1,6 +1,6 @@
 package Evaluacion2FS.Figuritas.Controller;
 
-import Evaluacion2FS.Figuritas.DTO.EnlaceDTO;
+import Evaluacion2FS.Figuritas.DTO.EnlaceDTO2;
 import Evaluacion2FS.Figuritas.Service.EnlaceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,29 +20,29 @@ public class EnlaceController {
 
     // trae todos los enlaces
     @GetMapping
-    public ResponseEntity<List<EnlaceDTO>> listarEnlaces() {
-        List<EnlaceDTO> enlaces = enlaceService.obtenerTodos();
+    public ResponseEntity<List<EnlaceDTO2>> listarEnlaces() {
+        List<EnlaceDTO2> enlaces = enlaceService.obtenerTodos();
         return new ResponseEntity<>(enlaces, HttpStatus.OK);
     }
 
     // trae un enlace segun el id que le pases en la ruta
     @GetMapping("/{id}")
-    public ResponseEntity<EnlaceDTO> obtenerEnlace(@PathVariable Integer id) {
-        EnlaceDTO enlace = enlaceService.buscarPorId(id);
+    public ResponseEntity<EnlaceDTO2> obtenerEnlace(@PathVariable Integer id) {
+        EnlaceDTO2 enlace = enlaceService.buscarPorId(id);
         return new ResponseEntity<>(enlace, HttpStatus.OK);
     }
 
     // guarda un enlace nuevo revisando que venga con los datos correctos por el @Valid
     @PostMapping
-    public ResponseEntity<EnlaceDTO> crearEnlace(@Valid @RequestBody EnlaceDTO enlaceDTO) {
-        EnlaceDTO nuevoEnlace = enlaceService.guardarEnlace(enlaceDTO);
+    public ResponseEntity<EnlaceDTO2> crearEnlace(@Valid @RequestBody EnlaceDTO2 enlaceDTO) {
+        EnlaceDTO2 nuevoEnlace = enlaceService.guardarEnlace(enlaceDTO);
         return new ResponseEntity<>(nuevoEnlace, HttpStatus.CREATED);
     }
 
     // putmapping es para editar algo que ya existe
     @PutMapping("/{id}")
-    public ResponseEntity<EnlaceDTO> actualizarEnlace(@PathVariable Integer id, @Valid @RequestBody EnlaceDTO enlaceDTO) {
-        EnlaceDTO enlaceActualizado = enlaceService.actualizarEnlace(id, enlaceDTO);
+    public ResponseEntity<EnlaceDTO2> actualizarEnlace(@PathVariable Integer id, @Valid @RequestBody EnlaceDTO2 enlaceDTO) {
+        EnlaceDTO2 enlaceActualizado = enlaceService.actualizarEnlace(id, enlaceDTO);
         return new ResponseEntity<>(enlaceActualizado, HttpStatus.OK);
     }
 
