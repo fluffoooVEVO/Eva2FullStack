@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Marca {
 
     // @Id indica que este campo es la llave primaria de la tabla
-    // @GeneratedValue hace que el id sea autoincrementable (1, 2, 3, etc)
+    // @GeneratedValue hace que el id sea autoincrementable (1, 2, 3, 4 etc)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_marca;
