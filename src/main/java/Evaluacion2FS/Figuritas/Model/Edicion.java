@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //id_edicion, nombre y descripcion
-
+//ELLO
 @Data
 @Entity
 @Builder
