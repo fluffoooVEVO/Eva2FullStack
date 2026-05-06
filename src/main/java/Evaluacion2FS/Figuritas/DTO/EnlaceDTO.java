@@ -6,7 +6,7 @@ import lombok.Data;
 
 // usamos este DTO para validar lo que nos mandan antes de guardarlo en la tabla enlace
 @Data
-public class EnlaceDTO2 {
+public class EnlaceDTO {
     
     private Integer id_enlace;
 

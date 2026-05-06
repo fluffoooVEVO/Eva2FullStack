@@ -1,6 +1,6 @@
 package Evaluacion2FS.Figuritas.Service;
 
-import Evaluacion2FS.Figuritas.DTO.MarcaDTO2;
+import Evaluacion2FS.Figuritas.DTO.MarcaDTO;
 import Evaluacion2FS.Figuritas.Exception.ResourceNotFoundException;
 import Evaluacion2FS.Figuritas.Model.Marca;
 import Evaluacion2FS.Figuritas.Repository.MarcaRepository;
@@ -19,8 +19,8 @@ public class MarcaService {
     private MarcaRepository marcaRepository;
 
     // este metodo para pasar de un modelo a un dto
-    private MarcaDTO2 convertirADto(Marca marca) {
-        MarcaDTO2 dto = new MarcaDTO2();
+    private MarcaDTO convertirADto(Marca marca) {
+        MarcaDTO dto = new MarcaDTO();
         dto.setId_marca(marca.getId_marca());
         dto.setNombre(marca.getNombre());
         dto.setDescripcion(marca.getDescripcion());
@@ -28,7 +28,7 @@ public class MarcaService {
     }
 
     // este hace lo contrario pasa de dto a modelo para poder guardarlo en la base de datos
-    private Marca convertirAModelo(MarcaDTO2 dto) {
+    private Marca convertirAModelo(MarcaDTO dto) {
         Marca marca = new Marca();
         marca.setNombre(dto.getNombre());
         marca.setDescripcion(dto.getDescripcion());
@@ -36,22 +36,22 @@ public class MarcaService {
     }
 
     // aca obtenemos todas las marcas
-    public List<MarcaDTO2> obtenerTodas() {
+    public List<MarcaDTO> obtenerTodas() {
         // buscamos todas las marcas en la bd
         List<Marca> listaMarcas = marcaRepository.findAll();
         // creamos una lista vacia para guardar los dtos
-        List<MarcaDTO2> listaDtos = new ArrayList<>();
+        List<MarcaDTO> listaDtos = new ArrayList<>();
 
         // usamos un for para recorrer la lista y transformar cada marca a dto
         for (Marca marca : listaMarcas) {
-            MarcaDTO2 dto = convertirADto(marca);
+            MarcaDTO dto = convertirADto(marca);
             listaDtos.add(dto);
         }
         return listaDtos;
     }
 
     // buscar una marca por su id
-    public MarcaDTO2 buscarPorId(Integer id) {
+    public MarcaDTO buscarPorId(Integer id) {
         // si no la encuentra lanzamos la excepcion que creamos en el primer commit
         Marca marca = marcaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("no se encontro ninguna marca con el id " + id));
@@ -59,14 +59,14 @@ public class MarcaService {
     }
 
     // guardar una marca nueva
-    public MarcaDTO2 guardarMarca(MarcaDTO2 marcaDTO) {
+    public MarcaDTO guardarMarca(MarcaDTO marcaDTO) {
         Marca nuevaMarca = convertirAModelo(marcaDTO);
         Marca marcaGuardada = marcaRepository.save(nuevaMarca);
         return convertirADto(marcaGuardada);
     }
 
     // actualizar una marca que ya existe
-    public MarcaDTO2 actualizarMarca(Integer id, MarcaDTO2 marcaDTO) {
+    public MarcaDTO actualizarMarca(Integer id, MarcaDTO marcaDTO) {
         // primero verificamos que exista
         Marca marcaExistente = marcaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("no se encontro la marca con el id " + id));

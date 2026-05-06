@@ -7,7 +7,7 @@ import lombok.Data;
 // el DTO (data transfer object) sirve para recibir los datos desde postman
 // sin exponer directamente la tabla de la base de datos por seguridad
 @Data
-public class MarcaDTO2 {
+public class MarcaDTO {
     
     private Integer id_marca;
 
