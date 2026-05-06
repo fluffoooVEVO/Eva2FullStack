@@ -1,13 +1,17 @@
 package Evaluacion2FS.Figuritas.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Data
 @Entity
@@ -31,11 +35,4 @@ public class Figuras {
     @Column(nullable = false, length = 255)
     private String descripcion;
 
-    // Relación con Edicion (sin @JoinColumn, JPA infiere el nombre de columna)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Edicion edicion;
-
-    // Lista de figuras (sin cascade, operaciones no se propagan automáticamente)
-    @OneToMany(mappedBy = "figuras", fetch = FetchType.LAZY)
-    private List<Figura> figuras;
 }
