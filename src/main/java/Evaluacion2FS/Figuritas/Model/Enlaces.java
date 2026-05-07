@@ -5,7 +5,5 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 public class Enlaces {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_enlace;
+    //prueba de commit
 }
