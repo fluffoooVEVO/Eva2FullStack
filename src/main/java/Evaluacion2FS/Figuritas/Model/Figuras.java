@@ -23,6 +23,11 @@ public class Figuras {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_producto_figura;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_producto;
     private Integer id_figuras;
 
     @NotBlank(message = "El nombre no puede quedar vacío")
@@ -36,3 +41,5 @@ public class Figuras {
     private String descripcion;
 
 }
+
+
