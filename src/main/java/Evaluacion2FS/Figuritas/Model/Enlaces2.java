@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-public class Enlaces {
+public class Enlaces2 {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_enlace;
