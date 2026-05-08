@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +25,6 @@ public class Producto {
     @NotBlank(message="El producto no puede quedar con atributo vacio")
     @Column(nullable=false,length=60)
     private String nombre;
+
 
 }

@@ -25,11 +25,6 @@ public class Figuras {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_producto_figura;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_producto;
-    private Integer id_figuras;
-
     @NotBlank(message = "El nombre no puede quedar vacío")
     @Size(min = 3, max = 60, message = "El nombre debe tener entre 3 y 60 caracteres")
     @Column(nullable = false, length = 60)
@@ -41,5 +36,3 @@ public class Figuras {
     private String descripcion;
 
 }
-
-
