@@ -1,14 +1,11 @@
 package Evaluacion2FS.Figuritas.Model;
-
-import java.util.List;
+//id_figura, nombre, descripcion y url
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,26 +19,23 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Edicion")
-public class Edicion {
+@Table(name="Figura")
+public class Figura {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id_edicion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_figura;
 
     @NotBlank(message="El nombre no puede quedar con atributo vacio")
     @Size(min=3, max=60, message="El nombre debe tener entre 3 y 60 caracteres")
-    @Column(nullable=false,length=60)
+    @Column(nullable=false, length=60)
     private String nombre;
-
-    @NotBlank(message="La descripcion no puede quedar con atributo vacio")
-    @Size(min=3, max=255, message="La descripcion debe tener entre3 y 255 caracteres")
-    @Column(nullable=false,length=255)
+    
+    @NotBlank(message="La descripcion no puede quedar con atributo vacio")      
+    @Size(min=3, max=255, message="La descripcion debe tener entre 3 y 255 caracteres")
+    @Column(nullable=false, length=255)
     private String descripcion;
 
-    @Column(nullable=true)
-    private Boolean status;
-
-    @OneToMany(mappedBy = "edicion", fetch = FetchType.LAZY)
-    private List<Figura> figuras;
+    @Column(nullable=true, length=255)
+    private String url;
 }
