@@ -25,29 +25,33 @@ public class FiguraController {
     private FiguraService figuraService;
 
     @GetMapping
-    public ResponseEntity<List<Figura>> obtenerFiguras(){
-        List<Figura> figuras=figuraService.obtenerTodos();
-        return ResponseEntity.ok(figuras);
+    public ResponseEntity<List<FiguraDTO>> obtenerFiguras(){
+        List<Figura> figuras = figuraService.obtenerTodos();
+        List<FiguraDTO> figurasDTO = figuraService.convertirListaADTO(figuras);
+        return ResponseEntity.ok(figurasDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Figura> obtenerPorId(@PathVariable Integer id_Figura){
-        return ResponseEntity.ok(figuraService.obtenerPorId(id_Figura));
-    }
-
-    @GetMapping("/{id}/dto")
-    public ResponseEntity<FiguraDTO> obtenerDTOporId(@PathVariable Integer id_Figura){
-        return ResponseEntity.ok(figuraService.obtenerDTOporId(id_Figura));
+    public ResponseEntity<FiguraDTO> obtenerPorId(@PathVariable Integer id_Figura){
+        Figura figura = figuraService.obtenerPorId(id_Figura);
+        FiguraDTO figuraDTO = figuraService.convertirADTO(figura);
+        return ResponseEntity.ok(figuraDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Figura> crearFigura(@RequestBody Figura figura){
-        return ResponseEntity.ok(figuraService.guardarFigura(figura));
+    public ResponseEntity<FiguraDTO> crearFigura(@RequestBody FiguraDTO figuraDTO){
+        Figura figura = figuraService.convertirAEntidad(figuraDTO);
+        Figura saved = figuraService.guardarFigura(figura);
+        FiguraDTO savedDTO = figuraService.convertirADTO(saved);
+        return ResponseEntity.ok(savedDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Figura> actualizarFigura(@PathVariable Integer id_Figura, @RequestBody Figura figura){
-        return ResponseEntity.ok(figuraService.actualizarFigura(id_Figura, figura));
+    public ResponseEntity<FiguraDTO> actualizarFigura(@PathVariable Integer id_Figura, @RequestBody FiguraDTO figuraDTO){
+        Figura figura = figuraService.convertirAEntidad(figuraDTO);
+        Figura updated = figuraService.actualizarFigura(id_Figura, figura);
+        FiguraDTO updatedDTO = figuraService.convertirADTO(updated);
+        return ResponseEntity.ok(updatedDTO);
     }
 
     @DeleteMapping("/{id}")
