@@ -13,8 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//id_edicion, nombre y descripcion
-//ELLO
+
 @Data
 @Entity
 @Builder
@@ -36,5 +35,8 @@ public class Edicion {
     @Size(min=3, max=255, message="La descripcion debe tener entre3 y 255 caracteres")
     @Column(nullable=false,length=255)
     private String descripcion;
+
+    @Column(nullable=true)
+    private Boolean status;
 
 }
