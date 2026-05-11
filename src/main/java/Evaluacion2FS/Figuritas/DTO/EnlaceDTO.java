@@ -19,4 +19,9 @@ public class EnlaceDTO {
     @NotBlank(message = "la url no puede ir en blanco")
     @Size(max = 255, message = "la url se paso del limite de caracteres")
     private String url;
+
+    //{
+  //"nombre": "Documentación Oficial Spring",
+  //"url": "https://spring.io/projects/spring-boot"
+    //}
 }

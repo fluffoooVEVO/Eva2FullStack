@@ -1,5 +1,7 @@
 package Evaluacion2FS.Figuritas.Model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
 
 // entidad principal que almacena el catalogo fisico de productos
 @Data
@@ -47,4 +48,28 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "id_edicion", nullable = false)
     private Edicion edicion;
+
+    // relacion obligatoria con la entidad categoria
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Categoria categoria;
+
+     // relacion obligatoria con la entidad figura
+    @ManyToOne
+    @JoinColumn(name = "id_figura", nullable = false)
+    private Figura figura;
+
+     // no se necesita relacion directa con imagen o enlace porque se accede a traves de las otras entidades
+     // esto mantiene el modelo mas limpio
+    
+    
+    // {
+  //"nombre": "Escuadrón de Exterminadores de los Ángeles Sangrientos",
+  //"descripcion": "Caja para montar 5 miniaturas de élite con armadura Terminator, incluyendo opciones de armas pesadas y sargento.",
+  //"fechaCreacion": "2026-05-10",
+  //"marca": { "id_marca": 1 },
+  //"edicion": { "id_edicion": 1 },
+  //"categoria": { "id_categoria": 1 },
+  //"figura": { "id_figura": 1 }
+//}
 }

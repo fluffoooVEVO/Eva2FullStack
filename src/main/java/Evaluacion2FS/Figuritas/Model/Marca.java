@@ -34,4 +34,10 @@ public class Marca {
     // aca solo limitamos el largo maximo a 255 caracteres
     @Column(length = 255)
     private String descripcion;
+
+    //{
+  //"nombre": "Games Workshop",
+  //"descripcion": "La marca más reconocida en el mundo de las figuras de Warhammer,
+// conocida por su calidad y detalle en cada una de sus figuras"}
+
 }
