@@ -18,7 +18,7 @@ import Evaluacion2FS.Figuritas.DTO.CategoriaDTO;
 import Evaluacion2FS.Figuritas.Service.CategoriaService;
 
 @RestController
-@RequestMapping("api/v1/Figuritas")
+@RequestMapping("api/v1/categoria")
 public class CategoriaController {
     
     @Autowired

@@ -44,4 +44,11 @@ public class Imagen {
     @ManyToOne
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
+
+    //{
+  //"url": "https://example.com/imagen1.jpg",
+  //"orden": 1,
+  //"descripcion": "Imagen de la figura en su pose más icónica",
+  //"id_producto": 123
+//}
 }

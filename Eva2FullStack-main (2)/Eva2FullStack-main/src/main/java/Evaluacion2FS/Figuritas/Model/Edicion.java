@@ -41,7 +41,13 @@ public class Edicion {
 
     @Column(nullable=true)
     private Boolean status;
-
+    
     @OneToMany(mappedBy = "edicion", fetch = FetchType.LAZY)
-    private List<Figura> figuras;
+    private List<Producto> productos;
+    //
+    //{
+  //"nombre": "Primarcas Traidores",
+  //"descripcion": "Edición especial de figuras de los líderes de las legiones que se unieron al Caos",
+  //"status": true
+//}
 }

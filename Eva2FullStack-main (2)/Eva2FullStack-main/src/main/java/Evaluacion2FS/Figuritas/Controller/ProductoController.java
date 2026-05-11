@@ -1,20 +1,21 @@
 package Evaluacion2FS.Figuritas.Controller;
 
-import Evaluacion2FS.Figuritas.DTO.ProductoDTO;
-import Evaluacion2FS.Figuritas.Service.ProductoService;
-import jakarta.validation.Valid;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import Evaluacion2FS.Figuritas.DTO.ProductoDTO;
+import Evaluacion2FS.Figuritas.Service.ProductoService;
+import jakarta.validation.Valid;
 
 // @RequestMapping define la ruta base (URL) para todos los endpoints de esta clase
 @RestController
@@ -37,7 +38,7 @@ public class ProductoController {
         return new ResponseEntity<>(productoService.buscarPorId(id), HttpStatus.OK);
     }
 
-    // endpoint de creacion (POST): 
+    // endpoint de creacion (POST):
     // @Valid ejecuta las validaciones definidas en el DTO (@NotBlank y @NotNull) antes de entrar al metodo
     // @RequestBody toma el JSON que envia el cliente (ej. por Postman) y lo transforma en el objeto ProductoDTO
     @PostMapping

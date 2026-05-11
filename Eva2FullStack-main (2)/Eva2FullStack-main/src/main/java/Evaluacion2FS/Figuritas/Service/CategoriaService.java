@@ -21,12 +21,9 @@ public class CategoriaService {
     @Autowired
     CategoriaRepository categoriaRepository;
 
-
-
     public List<Categoria> ObtenerStatusTrue() {
         // 1- creamos un objeto para llamar al repo
         List<Categoria>lista=categoriaRepository.findByStatusTrue();
-
         if(lista.isEmpty()){
             //2- si la lista esta vacia por ejemplo dara este error
             throw new RuntimeException("No hay categorías que encontrar");
@@ -34,7 +31,6 @@ public class CategoriaService {
         // como en el paso 1 ya se esta haciendo referencia al metodo de Repository no hace falta llamarlo completamente
         return lista;
     }
-
     public List<Categoria>ObtenerStatusFalse(){
         List<Categoria>lista=categoriaRepository.findByStatusFalse();
         if(lista.isEmpty()){
@@ -42,9 +38,6 @@ public class CategoriaService {
         }
         return lista;
     }
-
-
-
 
 
     public CategoriaDTO convertirADTO(Categoria categoria) {
@@ -76,7 +69,7 @@ public class CategoriaService {
         Categoria categoria=categoriaRepository.findById(id)
         .orElseThrow(()->{
             log.error("Error:no se encontro la categoria con id{}:",id);
-            return new RuntimeException("No se encontro el registro con ID:"+id);
+            return new RuntimeException("No se encontro el registro con ID:"+ id);
         });
         log.info("Categoria encontrada exitosamente");
         return convertirADTO(categoria);
@@ -107,7 +100,7 @@ public class CategoriaService {
     }
 
     public CategoriaDTO guardarCategoriaDTO(CategoriaDTO dto) {
-        log.info("Recibiendo DTO para guardar: {}", dto.getNombre());
+        log.info("Recibiendo categoria para guardar: {}", dto.getNombre());
         Categoria entidadParaGuardar=convertirAEntidad(dto);
         Categoria guardada=categoriaRepository.save(entidadParaGuardar);
         log.info("Categoría guardada con éxito");

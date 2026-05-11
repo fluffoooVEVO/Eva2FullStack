@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Evaluacion2FS.Figuritas.DTO.FigurasDTO;
+import Evaluacion2FS.Figuritas.Model.Figura;
 import Evaluacion2FS.Figuritas.Model.Figuras;
+import Evaluacion2FS.Figuritas.Model.Producto;
+import Evaluacion2FS.Figuritas.Repository.FiguraRepository;
 import Evaluacion2FS.Figuritas.Repository.FigurasRepository;
+import Evaluacion2FS.Figuritas.Repository.ProductoRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,9 +20,13 @@ public class FigurasService {
 
     @Autowired
     private FigurasRepository figurasRepository;
+    @Autowired
+    private FiguraRepository figuraRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
     private FigurasDTO convertirADTO(Figuras figura){
-        FigurasDTO dto= new FigurasDTO();
+        FigurasDTO dto=new FigurasDTO();
         dto.setId_producto_figura(figura.getId_producto_figura());
         dto.setId_producto(figura.getProducto().getId_producto());
         dto.setId_figura(figura.getFigura().getId_figura());
@@ -26,63 +34,72 @@ public class FigurasService {
     }
 
     private Figuras convertirAEntidad(FigurasDTO dto){
-        Figuras figura = new Figuras();
+        Figuras figura=new Figuras();
         figura.setId_producto_figura(dto.getId_producto_figura());
         figura.setProducto(null);
         figura.setFigura(null);
         return figura;
     }
 
-
-
-    public List<Figuras> obtenerTodos() {
-        log.info("Obteniendo todas las figuras");
-        List<Figuras> figuras = figurasRepository.findAll();
-        log.debug("Cantidad de figuras encontradas: ", figuras.size());
-        return figuras;
+    public List<FigurasDTO> obtenerTodos(){
+        return figurasRepository.findAll().stream()
+            .map(this::convertirADTO)
+            .toList();
     }
 
-    public String eliminarFigura(Integer id_producto_figura) {
-        log.info("Iniciando eliminación de figura con ID: ", id_producto_figura);
-        try {
-            Figuras figuras = figurasRepository.findById(id_producto_figura)
-                .orElseThrow(() -> {
-                    log.error("Figura no encontrada al eliminar con ID: ", id_producto_figura);
-                    return new RuntimeException("No se encontro registro con ID:" + id_producto_figura);
-                });
-            figurasRepository.delete(figuras);
-            log.info("Figura eliminada correctamente con ID: ", id_producto_figura);
-            return "La figura a sido eliminada exitosamente";
-        } catch (Exception e) {
-            log.error("Error al eliminar figura: ", e.getMessage(), e);
-            return e.getMessage();
+    public FigurasDTO guardarFigura(FigurasDTO dto){
+        log.info("Guardando figura");
+        Figuras figura = convertirAEntidad(dto);
+        log.info("Figura guardad con exito");
+        return convertirADTO(figurasRepository.save(figura));
+    }
+
+    public FigurasDTO obtenerPorID(Integer id){
+        log.info("Buscando ID: {}", id);
+        Figuras figura = figurasRepository.findById(id)
+            .orElseThrow(() -> {
+                log.error("Error: no se encontro la figura con id {}", id);
+                return new RuntimeException("No se encontro el registro con ID: " + id);
+            });
+        log.info("Figura encontrada exitosamente");
+        return convertirADTO(figura);
+    }
+
+    public String eliminarFigura(Integer id){
+        log.info("Eliminando figura con ID: {}", id);
+        if (!figurasRepository.existsById(id)) {
+            log.error("Error: no se encontro la figura con id {}", id);
+            throw new RuntimeException("No se encontro el registro con ID: " + id);
         }
-    }
-
-    public Figuras guardarFigura(Figuras figuras) {
-        log.info("Guardando nueva figura");
-        Figuras figuraGuardada = figurasRepository.save(figuras);
-        log.info("Figura guardada con ID: ", figuraGuardada.getId_producto_figura());
-        return figuraGuardada;
-    }
-
-    public Figuras actualizarFigura(Integer id_producto_figura, Figuras figuras) {
-        log.info("Iniciando actualización de figura con ID: ", id_producto_figura);
-        try {
-            Figuras figuraExistente = figurasRepository.findById(id_producto_figura)
-                .orElseThrow(() -> {
-                    log.error("Figura no encontrada al actualizar con ID: ", id_producto_figura);
-                    return new RuntimeException("No se encontro registro con ID:" + id_producto_figura);
-                });
-            figuraExistente.setProducto(figuras.getProducto());
-            figuraExistente.setFigura(figuras.getFigura());
-            Figuras figuraActualizada = figurasRepository.save(figuraExistente);
-            log.info("Figura actualizada correctamente con ID: ", figuraActualizada.getId_producto_figura());
-            return figuraActualizada;
-        } catch (Exception e) {
-            log.error("Error al actualizar figura: ", e.getMessage(), e);
-            throw new RuntimeException(e.getMessage());
-        }
+        figurasRepository.deleteById(id);
+        log.info("Figura eliminada exitosamente");
+        return "Figura eliminada exitosamente";
     }
     
+public FigurasDTO actualizarFigura(Integer id, FigurasDTO dto) { // Cambiado de Figuras a FigurasDTO
+    log.info("Iniciando actualizacion de Figura ID: {}", id);
+    Figuras existente=figurasRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("No se puede actualizar. ID " + id + " no encontrado."));
+
+    if (dto.getId_figura()!=null) {
+        Figura figurita = figuraRepository.findById(dto.getId_figura()) // Usamos el ID del DTO
+            .orElseThrow(() -> new RuntimeException("Entidad Figura no encontrada con ID: " + dto.getId_figura()));
+        existente.setFigura(figurita);
+    }
+    if (dto.getId_producto()!=null) {
+        Producto prod = productoRepository.findById(dto.getId_producto()) // Usamos el ID del DTO
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + dto.getId_producto()));
+        existente.setProducto(prod);
+    }
+
+    Figuras actualizada = figurasRepository.save(existente);
+    log.info("Figura ID {} actualizada correctamente", id);
+    return convertirADTO(actualizada);
+}
+
+
+
+
+
+
 }

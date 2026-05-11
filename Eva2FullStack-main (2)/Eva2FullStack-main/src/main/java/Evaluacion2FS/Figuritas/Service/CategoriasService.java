@@ -24,7 +24,7 @@ public class CategoriasService {
     @Autowired
     ProductoRepository productoRepository;
 
-    private CategoriasDTO convertirADTO(Categorias categoria){
+    public CategoriasDTO convertirADTO(Categorias categoria){
         CategoriasDTO dto= new CategoriasDTO();
         dto.setId_categorias_producto(categoria.getIdProductoCategoria());
         dto.setId_categorias(categoria.getCategoria().getIdCategoria());
@@ -99,6 +99,10 @@ public class CategoriasService {
         categoriasRepository.delete(categoria);
         log.info("Relación eliminada exitosamente");
         return info + " ha sido eliminada exitosamente";
+    }
+
+    public CategoriasDTO obtenerPorIdDTO(Long id) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

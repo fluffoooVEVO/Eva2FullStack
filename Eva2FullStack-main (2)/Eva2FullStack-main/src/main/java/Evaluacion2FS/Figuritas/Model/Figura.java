@@ -45,4 +45,10 @@ public class Figura {
     //no tocar o se chinga el diagrama
     @OneToMany(mappedBy = "figura")
     private List<Figuras> productos;
+
+    //{
+  //"nombre": "Horus Lupercal",
+  //"descripcion": "El primarca de la legión de los Hijos de Horus, conocido por su traición a la humanidad y su papel central en la Herejía de Horus",
+  //"url": "https://wh40k.lexicanum.com/wiki/Horus_Lupercal"
+//}
 }

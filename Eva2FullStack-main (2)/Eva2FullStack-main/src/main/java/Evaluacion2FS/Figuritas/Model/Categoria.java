@@ -41,6 +41,11 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     private List<Categorias> productos;
+
+    //{
+  //"nombre": "Mundial WH40K 2026",
+  //"descripcion": "categoria del mundial de warhammer 40k del año 2026",
+  //"status": true}
 }
 
 

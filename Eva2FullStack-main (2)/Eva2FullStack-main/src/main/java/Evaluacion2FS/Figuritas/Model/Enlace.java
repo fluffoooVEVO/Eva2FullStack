@@ -30,4 +30,9 @@ public class Enlace {
     // la url tambien es obligatoria para que no guarden enlaces vacios
     @Column(nullable = false, length = 255)
     private String url;
+
+    //{
+  //"nombre": "Lexicanum - Warhammer 40k Wiki",
+  //"url": "https://wh40k.lexicanum.com/wiki/Main_Page"
+//}
 }

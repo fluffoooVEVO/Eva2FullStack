@@ -27,9 +27,9 @@ public class EdicionService {
     public Edicion obtenerPorId(Integer id_Edicion) {
         log.info("Buscando edición con ID= ", id_Edicion);
         return edicionRepository.findById(id_Edicion)
-            .orElseThrow(() -> {
+            .orElseThrow(() ->{
                 log.error("Edición no encontrada con ID= ", id_Edicion);
-                return new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontro Edicion con la id");
+                return new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontro Edicion con la id"+ id_Edicion);
             });
     }
 
@@ -47,8 +47,8 @@ public class EdicionService {
 
     public Edicion guardarEdicion(Edicion edicion) {
         log.info("Guardando edición: ", edicion.getNombre());
-        Edicion saved = edicionRepository.save(edicion);
-        log.info("Edición guardada correctamente con ID= ", saved.getId_edicion());
+        Edicion saved= edicionRepository.save(edicion);
+        log.info("Edicion guardada correctamente con ID={}", edicion.getId_edicion());
         return saved;
     }
 
@@ -62,15 +62,15 @@ public class EdicionService {
                 return new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontro Edicion con esa id ");
             });
 
-        if (edicion.getNombre() != null) {
+        if (edicion.getNombre()!=null){
             log.debug("Actualizando nombre a: ", edicion.getNombre());
             edi.setNombre(edicion.getNombre());
         }
-        if (edicion.getDescripcion() != null) {
+        if (edicion.getDescripcion()!=null){
             log.debug("Actualizando descripcion a: ", edicion.getDescripcion());
             edi.setDescripcion(edicion.getDescripcion());
         }
-        if (edicion.getStatus() != null) {
+        if (edicion.getStatus()!=null){
             log.debug("Actualizando status a: ", edicion.getStatus());
             edi.setStatus(edicion.getStatus());
         }
@@ -79,4 +79,4 @@ public class EdicionService {
         log.info("Edición actualizada correctamente con ID= ", id_Edicion);
         return updated;
     }
-} 
+}
