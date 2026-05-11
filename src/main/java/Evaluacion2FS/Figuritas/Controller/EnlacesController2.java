@@ -13,7 +13,7 @@ import java.util.List;
 // controlador rest para exponer los endpoints de la tabla intermedia
 @RestController
 @RequestMapping("/api/v1/relacion-enlaces")
-public class EnlacesController {
+public class EnlacesController2 {
 
     @Autowired
     private EnlacesService enlacesService;
